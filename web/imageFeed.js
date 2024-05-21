@@ -11,7 +11,7 @@
 
 import { api } from '../../scripts/api.js'
 import { app } from '../../scripts/app.js'
-import { LocalStorageManager } from "./comfy_shared.js"
+import { LocalStorageManager } from './comfy_shared.js'
 const styles = {
   lighbox: {
     position: 'fixed',
@@ -53,9 +53,9 @@ let currentImageIndex = 0
 const imageUrls = []
 
 let image_menu = null
-const storage = new LocalStorageManager('mtb');
+const storage = new LocalStorageManager('mtb')
 
-let activated = storage.get("image_feed", true)
+let activated = storage.get('image_feed', true)
 
 app.registerExtension({
   name: 'mtb.ImageFeed',
@@ -71,13 +71,15 @@ app.registerExtension({
         },
       },
       async onChange(value) {
-        storage.set("image_feed", value)
+        storage.set('image_feed', value)
         activated = value
       },
     })
   },
   init: async () => {
-    if (!activated) { return }
+    if (!activated) {
+      return
+    }
     const pythongossFeed = app.extensions.find(
       (e) => e.name == 'pysssss.ImageFeed'
     )
@@ -250,8 +252,9 @@ app.registerExtension({
         objectFit: 'cover',
       })
 
-      img.src = `/view?filename=${encodeURIComponent(src.filename)}&type=${src.type
-        }&subfolder=${encodeURIComponent(src.subfolder)}`
+      // img.src = `/view?filename=${encodeURIComponent(src.filename)}&type=${src.type
+      //   }&subfolder=${encodeURIComponent(src.subfolder)}`
+      img.src = src.url
 
       imageUrls.push(img.src)
 
